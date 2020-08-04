@@ -2,6 +2,9 @@
 
 Written entirely in Swift here is my take on Toast for iOS. There are many alerntives already out there so Im keepoing my offering complermtly open and away from any dependacy management packages for now.
 
+## 🎧 Alternative options
+Bagel for Objective-C https://github.com/MrChrisBarker/bagel-objectivec-toast
+
 ## 🎬 Features
 Toast like popup for iOS which can be added to a specific view or to the first main Window View. Default timings, colors and fonts are used but are also fully customisable too.
 
