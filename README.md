@@ -1,12 +1,14 @@
 # Crumpet - Toast (Android) for iOS
 
-Written entirely in Swift here is my take on Toast for iOS. There are many alerntives already out there so Im keepoing my offering complermtly open and away from any dependacy management packages for now.
+<img src="https://github.com/MrChrisBarker/crumpet-swift-toast/blob/master/Assets/crumpet_swift.png" alt="Crumpet Logo" height="175" />
+
+Written entirely in Swift here is my take on Toast for iOS. There are many alternatives already out there so I'm keeping my offering open and away from any dependancy management packages for now.
 
 ## 🎧 Alternative options
 Bagel for Objective-C https://github.com/MrChrisBarker/bagel-objectivec-toast
 
 ## 🎬 Features
-Toast like popup for iOS which can be added to a specific view or to the first main Window View. Default timings, colors and fonts are used but are also fully customisable too.
+Toast like popup for iOS which can be added to a specific view or to the first main Window View. Default timings, colors and fonts are used but are also fully customisable.
 
 ## 🧰 Installation
 Add `Crumpet.swift` to your iOS project.
