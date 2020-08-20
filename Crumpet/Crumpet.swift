@@ -21,15 +21,29 @@ class Crumpet {
     var textAlignment = NSTextAlignment.center
     var bottomConstraint: CGFloat = -46.0
     
+    private var baking = false
+    private var messages = [Messaage]()
+    
+    // MARK: Public functions
+    
     func pop(message: String, _ view: UIView? = Crumpet.shared.keyWindow) {
-                
+        messages.append(Messaage(message: message, view: view))
+        sendMessage(toView: view)
+    }
+    
+    // MARK: Fileprivate functions
+    
+    fileprivate func makeCrumpet(_ message: String, _ view: UIView?, completion: @escaping () -> Void) {
+        
+        baking = true
+        
         // Setup UIView 🧇 (it looked like a Crumpet...)
         let crumpetView = UIView()
         crumpetView.backgroundColor = backgroundColor.withAlphaComponent(0.6)
         crumpetView.alpha = 0.0
         crumpetView.layer.cornerRadius = 15
         crumpetView.clipsToBounds  =  true
-
+        
         // Setup UILabel 🏷
         let textLabel = UILabel()
         textLabel.textColor = textColor
@@ -41,14 +55,14 @@ class Crumpet {
         
         crumpetView.addSubview(textLabel)
         view?.addSubview(crumpetView)
-
+        
         // Set Constaints 🏗
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         crumpetView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         crumpetView.addConstraints(item: textLabel, leading: 16, trailing: -16, top: 16, bottom: -16)
         view?.addConstraints(item: crumpetView, leading: 66, trailing: -66, top: nil, bottom: bottomConstraint)
-
+        
         // Animate our UIView 🎥
         UIView.animate(withDuration: self.speed, delay: 0.0, options: .curveEaseIn, animations: {
             crumpetView.alpha = 1.0
@@ -57,12 +71,31 @@ class Crumpet {
                 crumpetView.alpha = 0.0
             }, completion: { _ in
                 crumpetView.removeFromSuperview()
+                self.baking = false
+                completion()
             })
         })
         
     }
+        
+    fileprivate func sendMessage(toView view: UIView?) {
+        
+        guard !baking,
+            let nextMessage = messages.first,
+            let nextMessageText = nextMessage.message,
+            let toView = nextMessage.view,
+            messages.hasItems else {
+                return
+        }
+        
+        makeCrumpet(nextMessageText, toView) {
+            self.messages.removeFirst()
+            self.sendMessage(toView: toView)
+        }
+        
+    }
     
-    private var keyWindow: UIWindow? {
+    fileprivate var keyWindow: UIWindow? {
         return UIApplication.shared.windows.first
     }
         
@@ -90,4 +123,21 @@ fileprivate extension UIView {
         }
     }
     
+}
+
+fileprivate struct Messaage {
+    var message: String?
+    var view: UIView?
+}
+
+fileprivate extension String {
+    var hasValue: Bool {
+        return self != ""
+    }
+}
+
+fileprivate extension Array {
+    var hasItems: Bool {
+        return self.count > 0
+    }
 }
