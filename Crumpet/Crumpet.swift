@@ -28,7 +28,7 @@ class Crumpet {
     
     func pop(message: String, _ view: UIView? = Crumpet.shared.keyWindow) {
         messages.append(Messaage(message: message, view: view))
-        sendMessage(toView: view)
+        sendMessage()
     }
     
     // MARK: Fileprivate functions
@@ -78,7 +78,7 @@ class Crumpet {
         
     }
         
-    fileprivate func sendMessage(toView view: UIView?) {
+    fileprivate func sendMessage() {
         
         guard !baking,
             let nextMessage = messages.first,
@@ -90,7 +90,7 @@ class Crumpet {
         
         makeCrumpet(nextMessageText, toView) {
             self.messages.removeFirst()
-            self.sendMessage(toView: toView)
+            self.sendMessage()
         }
         
     }
